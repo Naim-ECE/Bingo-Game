@@ -12,6 +12,23 @@ let pr = document.querySelector(".sc");
 
 let interval;
 
+const startAgain = () => {
+    dialogue.classList.remove("fade");
+    dialogue.removeEventListener("click", startAgain);
+    dialogue.style.cursor = "auto";
+    dialogue.innerText = `Score =`;
+    dialogue.style.fontSize = "2.5rem";
+    void dialogue.offsetWidth;
+    dialogue.classList.add("fade");
+    pr.classList.remove("fade2");
+    pr.classList.remove("fade3");
+    pr.classList.remove("fade");
+    pr.innerText = ` 0`;
+    void pr.offsetWidth;
+    pr.classList.add("fade");
+    again();
+}
+
 const again = () => {
 
     generator.classList.remove("fade2");
@@ -82,7 +99,15 @@ const again = () => {
                 // console.log("Done");
                 clearInterval(interval);
                 generator.classList.remove("fade2");
-                generator.innerText = `Your Score is ${count - negative}`;
+                if(count - negative === 16) {
+                    generator.innerText = `Congrats!`;
+                }
+                else {
+                    generator.innerText = `Your Score is ${count - negative}`;
+                }
+
+                dialogue.removeEventListener("click", startAgain);
+                dialogue.style.cursor = "default";
                 void generator.offsetWidth;
                 generator.classList.add("fade");
                 generator.style.color = `black`;
@@ -90,22 +115,24 @@ const again = () => {
                 dialogue.innerText = `Game Over`;
                 pr.innerText = ``;
                 dialogue.classList.add("fade");
+                
 
                 setTimeout(() => {
                     dialogue.classList.remove("fade");
                     dialogue.innerText = `Click here to start again`;
+                    dialogue.style.cursor = "pointer";
                     dialogue.style.fontSize = "1.8rem";
                     void dialogue.offsetWidth;
                     dialogue.classList.add("fade");
 
                     generator.classList.remove("fade2");
+                    //if(count - negative === 16) {
                     generator.innerText = `Your Score is ${count - negative}`;
+                    //}
                     void generator.offsetWidth;
                     generator.classList.add("fade");
 
-                    dialogue.addEventListener("click", () => {
-                        startAgain();
-                    })
+                    dialogue.addEventListener("click", startAgain);
                 }, 1800)
             }
             if(!match) {
@@ -122,17 +149,3 @@ const again = () => {
     }
 }
 again();
-const startAgain = () => {
-    dialogue.classList.remove("fade");
-    dialogue.innerText = `Score =`;
-    dialogue.style.fontSize = "2.5rem";
-    void dialogue.offsetWidth;
-    dialogue.classList.add("fade");
-    pr.classList.remove("fade2");
-    pr.classList.remove("fade3");
-    pr.classList.remove("fade");
-    pr.innerText = ` 0`;
-    void pr.offsetWidth;
-    pr.classList.add("fade");
-    again();
-}
