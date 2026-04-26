@@ -2,6 +2,8 @@
 
 <p>Play it here - <a target = "_blank" href = "https://naim-ece.github.io/Bingo-Game/">Bingo(Number Matching Game)</a></p>
 
+---
+
 - [x] Completed Project
 - [ ] Further Development
 - [x] UI Improvement
